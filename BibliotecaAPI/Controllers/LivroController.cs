@@ -19,19 +19,33 @@ namespace BibliotecaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Livro>>> GetLivros()
         {
-            return await _context.Livros.ToListAsync();
-        }
+            var livro = await _context.Livros
+                .Include(l => l.Editora)
+                .Include(l => l.Autor)
+                .FirstAsync();
+                
 
+            if (livro == null)
+            {
+                return NotFound();
+            }
+            return Ok(livro);
+        }
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Livro>> GetLivro(int id)
         {
-            var livro = await _context.Livros.FindAsync(id);
+            var livro = await _context.Livros
+            .Include(l => l.Editora) 
+            .Include(l => l.Autor)   
+            .FirstOrDefaultAsync(l => l.Id == id);
             if (livro == null)
+            {
                 return NotFound();
-
-            return livro;
+            }
+            return Ok(livro);
         }
-
+        
         [HttpPost]
         public async Task<ActionResult<Livro>> PostLivro(Livro livro)
         {

@@ -19,7 +19,9 @@ namespace BibliotecaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Autor>>> GetAutores()
         {
-            return await _context.Autores.ToListAsync();
+            return await _context.Autores
+                .Include(l => l.Livros)
+            .ToListAsync();
         }
 
         [HttpGet("{id}")]

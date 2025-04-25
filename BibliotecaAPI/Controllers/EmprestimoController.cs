@@ -16,14 +16,14 @@ namespace BibliotecaAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Emprestimo
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Emprestimo>>> GetEmprestimos()
         {
             return await _context.Emprestimos.ToListAsync();
         }
 
-        // GET: api/Emprestimo/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Emprestimo>> GetEmprestimo(int id)
         {
@@ -37,7 +37,7 @@ namespace BibliotecaAPI.Controllers
             return emprestimo;
         }
 
-        // POST: api/Emprestimo
+        
         [HttpPost]
         public async Task<ActionResult<Emprestimo>> PostEmprestimo(Emprestimo emprestimo)
         {
@@ -47,7 +47,7 @@ namespace BibliotecaAPI.Controllers
             return CreatedAtAction("GetEmprestimo", new { id = emprestimo.Id }, emprestimo);
         }
 
-        // PUT: api/Emprestimo/5
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmprestimo(int id, Emprestimo emprestimo)
         {
@@ -62,7 +62,7 @@ namespace BibliotecaAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Emprestimo/5
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmprestimo(int id)
         {
